@@ -1,8 +1,8 @@
 {
-  "name": "Start on Heroku: Node.js",
-  "description": "A barebones Node.js app using Express 4",
-  "repository": "https://github.com/heroku/node-js-getting-started",
-  "logo": "http://node-js-sample.herokuapp.com/node.svg",
-  "keywords": ["node", "express", "static"],
+  "name": "GitHubble",
+  "description": "Jedis of GitHub",
+  "repository": "https://github.com/forksociety/githubble",
+  "logo": "http://githubble.herokuapp.com/logo.jpeg",
+  "keywords": ["githubble", "GitHubble", "GitHub"],
   "image": "heroku/nodejs"
 }
