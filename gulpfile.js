@@ -1,33 +1,34 @@
 /*******************************
             Set-up
 *******************************/
+var sematicSrc = './public/semantic/';
 
 var
   gulp         = require('gulp-help')(require('gulp')),
 
   // read user config to know what task to load
-  config       = require('./semantic/tasks/config/user'),
+  config       = require(sematicSrc + 'tasks/config/user'),
 
   // watch changes
-  watch        = require('./semantic/tasks/watch'),
+  watch        = require(sematicSrc + 'tasks/watch'),
 
   // build all files
-  build        = require('./semantic/tasks/build'),
-  buildJS      = require('./semantic/tasks/build/javascript'),
-  buildCSS     = require('./semantic/tasks/build/css'),
-  buildAssets  = require('./semantic/tasks/build/assets'),
+  build        = require(sematicSrc + 'tasks/build'),
+  buildJS      = require(sematicSrc + 'tasks/build/javascript'),
+  buildCSS     = require(sematicSrc + 'tasks/build/css'),
+  buildAssets  = require(sematicSrc + 'tasks/build/assets'),
 
   // utility
-  clean        = require('./semantic/tasks/clean'),
-  version      = require('./semantic/tasks/version'),
+  clean        = require(sematicSrc + 'tasks/clean'),
+  version      = require(sematicSrc + 'tasks/version'),
 
   // docs tasks
-  serveDocs    = require('./semantic/tasks/docs/serve'),
-  buildDocs    = require('./semantic/tasks/docs/build'),
+  serveDocs    = require(sematicSrc + 'tasks/docs/serve'),
+  buildDocs    = require(sematicSrc + 'tasks/docs/build'),
 
   // rtl
-  buildRTL     = require('./semantic/tasks/rtl/build'),
-  watchRTL     = require('./semantic/tasks/rtl/watch')
+  buildRTL     = require(sematicSrc + 'tasks/rtl/build'),
+  watchRTL     = require(sematicSrc + 'tasks/rtl/watch')
 ;
 
 
@@ -35,13 +36,15 @@ var
 /*******************************
              Tasks
 *******************************/
+/* to sync 2 folders
 var source = './semantic/dist',  
     destination = './public/semantic';
 
 gulp.task('sync', function() {  
-  gulp.src(source + '/**/*', {base: source})
+  gulp.src(source + '/**'remove this while using'/*', {base: source})
     .pipe(gulp.dest(destination));
 });
+*/
 
 
 gulp.task('default', false, [

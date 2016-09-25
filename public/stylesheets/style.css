@@ -21,7 +21,7 @@
 }
 
 .ui.text.container.wider {
-	max-width: 800px !important;
+	max-width: 900px !important;
 }
 	
 .ui.text.container.custom {
@@ -33,8 +33,14 @@
 	padding-bottom: 0.5em;
 }
 
-.ui.link.cards .card:hover {
+.ui.cards .card:hover {
 	cursor: auto !important;
+    z-index: 5;
+    background: #FFF;
+    border: none;
+    box-shadow: 0 1px 3px 0 #BCBDBD,0 0 0 1px #D4D4D5;
+    -webkit-transform: translateY(-3px);
+    transform: translateY(-3px);
 }
 
 .card .extra.content {
