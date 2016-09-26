@@ -4,8 +4,8 @@ var mongoose = require ("mongoose"); // The reason for this demo.
 // Here we find an appropriate database to connect to, defaulting to
 // localhost if we don't find one.  
 var uristring = 
-  process.env.MONGODB_URI || 
-  'mongodb://heroku_qw7bwc50:s8jhjl8vrn799pooaqudt699bm@ds035046.mlab.com:35046/heroku_qw7bwc50';
+  process.env.MONGODB_URI ||
+  'mongodb://localhost,localhost:35046';
 
 // The http server will listen to an appropriate port, or default to
 // port 5000.
