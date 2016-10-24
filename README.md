@@ -1,4 +1,5 @@
-# GitHubble [![Deploy to Heroku](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy)
+# GitHubble 
+[![Deploy to Heroku](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy)
 
 ### Status: test repo
 ### Note: don't create PRs or issues right now. We are working on it locally, at present.
