@@ -1,39 +1,97 @@
 var express = require('express');
-var mongoose = require ("mongoose"); // The reason for this demo.
+var mongoose = require ("mongoose");
 
-// Here we find an appropriate database to connect to, defaulting to
-// localhost if we don't find one.  
-var uristring = 
+// database path, default: localhost
+var mongoDbUri = 
   process.env.MONGODB_URI ||
   'mongodb://localhost,localhost:35046';
 
-// The http server will listen to an appropriate port, or default to
-// port 5000.
-var theport = process.env.PORT || 5000;
+var githubAccessToken = 
+  process.env.GITHUB_TOKEN;
+
+var githubApiUrl =
+  process.env.GITHUB_API ||
+  'https://api.github.com/users/';
+
+var users = [
+    {
+        name: 'Prabhanshu Attri',
+        username: 'PrabhanshuAttri',
+        avatar: 'https://avatars1.githubusercontent.com/u/4739486?v=3&s=460',
+        link: {
+            site: 'http://prabhanshu.com',
+            github: 'http://prabhanshu.com/github',
+            mail: 'contact@prabhanshu.com'
+        },
+        org: 'Nirmankarta, ForkSoceity',
+        joined: '19th Jun 2013',
+        located: 'Delhi, India'
+    }
+];
+
+// The http server will listen to an appropriate port, or default to port 5000.
+var port = process.env.PORT || 5000;
+
+// Schema for each user
+var userSchema = new mongoose.Schema({
+    id: { type: String, trim: true }, 
+    name: { type: String, trim: true },
+    username: { type: String, lowercase: true, trim: true },
+    avatar: { type: String, trim: true },
+    isFemale: Boolean,
+    link: {
+        site: { type: String, trim: true },
+        github: { type: String, trim: true },
+        mail: { type: String, trim: true }
+    },
+    org: { type: String, trim: true },
+    joined: { type: String, trim: true },
+    located: { type: String, trim: true },
+    updated: { type: Date, default: Date.now }
+});
+
+// Compiles the schema into a model, opening (or creating, if
+// nonexistent) the 'user' collection in the MongoDB database
+var Jedi = mongoose.model('user', userSchema);
+
+// Clear out old data
+Jedi.remove({}, function(err) {
+  if (err) {
+    console.log ('error deleting old data.');
+  }
+});
+
+var jedi_username = [
+    'PrabhanshuAttri',
+    'una',
+    'daneden',
+    'FatimaRafiqui'
+];
+
+jedi_username.forEach(function(u) {
+    var completeURL = githubApiUrl + u + '?access_token=' + githubAccessToken;
+    console.log(completeURL);
+});
 
 // Makes connection asynchronously.  Mongoose will queue up database
 // operations and release them when the connection is complete.
-mongoose.connect(uristring, function (err, res) {
+mongoose.connect(mongoDbUri, function (err, res) {
   if (err) { 
-    console.log ('ERROR connecting to: ' + uristring + '. ' + err);
+    console.log ('ERROR connecting to: ' + mongoDbUri + '. ' + err);
   } else {
-    console.log ('Succeeded connected to: ' + uristring);
+    console.log ('Succeeded connected to: ' + mongoDbUri);
   }
 });
 
 
 var app = express();
-
-app.set('port', (process.env.PORT || 5000));
-
+app.set('port', port);
 app.use(express.static(__dirname + '/public'));
-
-// views is directory for all template files
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
 
 app.get('/', function(request, response) {
-  response.render('pages/index');
+  response.render('pages/index', {users: users});
 });
 
 app.get('/db', function(request, response) {
@@ -46,27 +104,8 @@ app.get('/about', function(request, response) {
 });
 
 
-// This is the schema.  Note the types, validation and trim
-// statements.  They enforce useful constraints on the data.
-var userSchema = new mongoose.Schema({
-  name: {
-    first: String,
-    last: { type: String, trim: true }
-  },
-  age: { type: Number, min: 0}
-});
 
-// Compiles the schema into a model, opening (or creating, if
-// nonexistent) the 'PowerUsers' collection in the MongoDB database
-var PUser = mongoose.model('PowerUsers', userSchema);
-
-// Clear out old data
-PUser.remove({}, function(err) {
-  if (err) {
-    console.log ('error deleting old data.');
-  }
-});
-
+/*
 // Creating one user.
 var johndoe = new PUser ({
   name: { first: 'John', last: 'Doe' },
@@ -75,34 +114,16 @@ var johndoe = new PUser ({
 
 // Saving it to the database.  
 johndoe.save(function (err) {if (err) console.log ('Error on save!')});
-
-// Creating more users manually
-var janedoe = new PUser ({
-  name: { first: 'Jane', last: 'Doe' },
-  age: 65
-});
-janedoe.save(function (err) {if (err) console.log ('Error on save!')});
-
-// Creating more users manually
-var alicesmith = new PUser ({
-  name: { first: 'Alice', last: 'Smith' },
-  age: 45
-});
-alicesmith.save(function (err) {if (err) console.log ('Error on save!')});
-
-var alicesmith = new PUser ({
-  name: { first: 'Prabhanshu', last: 'Attri' },
-  age: 22
-});
-alicesmith.save(function (err) {if (err) console.log ('Error on save!')});
-
+*/
 
 // In case the browser connects before the database is connected, the
 // user will see this message.
 var found = ['DB Connection not yet established.  Try again later.  Check the console output for error messages if this persists.'];
 
 function createWebpage (request, response) {
-  // Let's find all the documents
+    console.log('about page');
+    // Let's find all the documents
+  /*
   PUser.find({}).exec(function(err, result) {
     if (!err) { 
       response.write(html1 + JSON.stringify(result, undefined, 2) +  html2 + result.length + html3);
@@ -119,12 +140,12 @@ function createWebpage (request, response) {
     } else {
       response.write('Error in first query. ' + err)
     };
-  });
+  });*/
 }
 
 // Tell the console we're getting ready.
 // The listener in http.createServer should still be active after these messages are emitted.
-console.log('http server will be listening on port %d', theport);
+console.log('http server will be listening on port %d', port);
 console.log('CTRL+C to exit');
 
 //
@@ -148,9 +169,6 @@ var html4 = '<h2> Queried (name.last = "Doe", age >64) Documents in MonogoDB dat
 var html5 = '</code></pre> <br\> <i>';
 var html6 = ' documents. </i> <br\> <br\> \
 <br\> <br\> <center><i> Demo code available at <a href="http://github.com/mongolab/hello-mongoose">github.com</a> </i></center>';
-
-
-
 
 
 app.listen(app.get('port'), function() {

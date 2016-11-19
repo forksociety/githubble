@@ -7,98 +7,12 @@
   <% include ../partials/nav.ejs %>
 
   <div class="ui text container custom wider">
-    <div class="ui three raised stackable cards">
-      <div class="card">
-        <div class="image">
-          <img src="https://avatars.githubusercontent.com/u/3143348?v=3">
-        </div>
-        <div class="content">
-          <a href="https://github.com/amandaharlin" target="_blank"><i class="right floated github icon"></i></a>
-          <a href="mailto:amanda.n.harlin@gmail.com" target="_blank"><i class="right floated mail outline icon"></i></a>
-          <a href="http://amandaharlin.com" target="_blank"><i class="right floated linkify icon"></i></a>
-          <div class="header">Laura</div>
-          <div class="meta">
-            <a href="https://github.com/amandaharlin" target="_blank">alicetragedy</a>
-          </div>
-          <div class="description">
-            <i class="users icon"></i> Travis Foundation<br/>
-            <i class="add user icon"></i> Joined on Dec 28, 2012
-          </div>
-        </div>
-        <div class="extra content">
-          <span class="right floated">
-            <i class="world icon"></i> Vienna, Austria
-          </span>
-        </div>
-      </div>
-      <div class="card">
-        <div class="image">
-          <img src="https://avatars.githubusercontent.com/u/716644?v=3">
-        </div>
-        <div class="content">
-          <a href="https://github.com/amandaharlin" target="_blank"><i class="right floated github icon"></i></a>
-          <a href="mailto:amanda.n.harlin@gmail.com" target="_blank"><i class="right floated mail outline icon"></i></a>
-          <a href="http://amandaharlin.com" target="_blank"><i class="right floated linkify icon"></i></a>
-          <div class="header">Amanda Harlin</div>
-          <div class="meta">
-            <a  href="https://github.com/amandaharlin" target="_blank">amandaharlin</a>
-          </div>
-          <div class="description">
-            <i class="users icon"></i> Techlahoma Foundation<br/>
-            <i class="add user icon"></i> Joined on Apr 08, 2011
-          </div>
-        </div>
-        <div class="extra content">
-          <span class="right floated">
-            <i class="world icon"></i> Norman, Oklahoma
-          </span>
-        </div>
-      </div>
-      <div class="card">
-        <div class="image">
-          <img src="https://avatars.githubusercontent.com/u/1163554?v=3">
-        </div>
-        <div class="content">
-          <a href="https://github.com/amandaharlin" target="_blank"><i class="right floated github icon"></i></a>
-          <a href="mailto:amanda.n.harlin@gmail.com" target="_blank"><i class="right floated mail outline icon"></i></a>
-          <a href="http://amandaharlin.com" target="_blank"><i class="right floated linkify icon"></i></a>
-          <div class="header">ashley williams</div>
-          <div class="meta">
-            <a href="https://github.com/amandaharlin" target="_blank">ashleygwilliams</a>
-          </div>
-          <div class="description">
-            <i class="users icon"></i> npm, inc<br/>
-            <i class="add user icon"></i> Joined on Oct 31, 2011
-          </div>
-        </div>
-        <div class="extra content">
-          <span class="right floated">
-            <i class="world icon"></i> ridgewood, queens, NYC
-          </span>
-        </div>
-      </div>
-      <div class="card">
-        <div class="image">
-          <img src="https://avatars.githubusercontent.com/u/1305617?v=3">
-        </div>
-        <div class="content">
-          <a href="https://github.com/amandaharlin" target="_blank"><i class="right floated github icon"></i></a>
-          <a href="mailto:amanda.n.harlin@gmail.com" target="_blank"><i class="right floated mail outline icon"></i></a>
-          <a href="http://amandaharlin.com" target="_blank"><i class="right floated linkify icon"></i></a>
-          <div class="header">Jessica Lord</div>
-          <div class="meta">
-            <a href="https://github.com/amandaharlin" target="_blank">jlord</a>
-          </div>
-          <div class="description">
-            <i class="users icon"></i> GitHub<br/>
-            <i class="add user icon"></i> Joined on Jan 05, 2012
-          </div>
-        </div>
-        <div class="extra content">
-          <span class="right floated">
-            <i class="world icon"></i> Portland, Ore
-          </span>
-        </div>
+    <div class="ui three raised stackable cards">   
+
+    <% users.forEach(function(u) { %>
+        <% include ../partials/user_card.ejs %>
+    <% }); %>
+
       </div>
     </div>
   </div>
